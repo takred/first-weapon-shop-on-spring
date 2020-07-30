@@ -2,7 +2,11 @@ package takred.weaponshop.service;
 
 import org.springframework.stereotype.Service;
 import takred.weaponshop.Couple;
+import takred.weaponshop.builder.WeaponBuilder;
+import takred.weaponshop.builder.WeaponDtoBuilder;
+import takred.weaponshop.dto.WeaponDto;
 import takred.weaponshop.entity.Weapon;
+import takred.weaponshop.mapper.WeaponMapper;
 import takred.weaponshop.repository.WeaponRepository;
 
 import javax.annotation.PostConstruct;
@@ -30,9 +34,10 @@ public class WeaponService {
         saveIfNotExists(new Weapon("Меч4", 4, 4, 4));
     }
 
-    public Weapon getWeapon(UUID id) {
+    public WeaponDto getWeapon(UUID id) {
         if (weaponRepository.existsById(id)) {
-            return weaponRepository.findById(id).get();
+            Weapon weapon = weaponRepository.findById(id).get();
+            return new WeaponMapper().map(weapon);
         }
         return null;
     }
@@ -48,7 +53,8 @@ public class WeaponService {
         return couples;
     }
 
-    public String addWeapon(Weapon weapon) {
+    public String addWeapon(WeaponDto weaponDto) {
+        Weapon weapon = new WeaponMapper().map(weaponDto);
         if (!weaponRepository.existsByName(weapon.getName())) {
             weaponRepository.save(weapon);
             return "Оружие успешно добавлено.";

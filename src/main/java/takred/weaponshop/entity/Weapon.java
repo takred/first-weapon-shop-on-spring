@@ -31,6 +31,14 @@ public class Weapon {
         this.bladeWidth = bladeWidth;
     }
 
+    public Weapon(UUID id, String name, int weight, int bladeLength, int bladeWidth) {
+        this.id = id;
+        this.name = name;
+        this.weight = weight;
+        this.bladeLength = bladeLength;
+        this.bladeWidth = bladeWidth;
+    }
+
     public UUID getId() {
         return id;
     }

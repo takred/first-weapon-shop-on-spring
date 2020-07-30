@@ -2,6 +2,7 @@ package takred.weaponshop.web;
 
 import org.springframework.web.bind.annotation.*;
 import takred.weaponshop.Couple;
+import takred.weaponshop.dto.WeaponDto;
 import takred.weaponshop.entity.Weapon;
 import takred.weaponshop.service.WeaponService;
 
@@ -18,7 +19,7 @@ public class WeaponController {
     }
 
     @GetMapping(value = "get_weapon/{id}")
-    public Weapon getWeapon(@PathVariable("id") UUID id) {
+    public WeaponDto getWeapon(@PathVariable("id") UUID id) {
         return weaponService.getWeapon(id);
     }
 
@@ -28,7 +29,7 @@ public class WeaponController {
     }
 
     @PostMapping(value = "add_weapon")
-    public String addWeapon(@RequestBody Weapon weapon) {
-        return weaponService.addWeapon(weapon);
+    public String addWeapon(@RequestBody WeaponDto weaponDto) {
+        return weaponService.addWeapon(weaponDto);
     }
 }
