@@ -28,7 +28,7 @@ public class WeaponController {
     }
 
     @PostMapping(value = "add_weapon")
-    public String addWeapon(Weapon weapon) {
+    public String addWeapon(@RequestBody Weapon weapon) {
         return weaponService.addWeapon(weapon);
     }
 }
