@@ -1,0 +1,17 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="001" author="takred">
+        <createTable tableName="weapons">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar (255)"/>
+            <column name="weight" type="integer"/>
+            <column name="blade_length" type="integer"/>
+            <column name="blade_width" type="integer"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
