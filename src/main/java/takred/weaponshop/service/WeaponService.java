@@ -2,6 +2,7 @@ package takred.weaponshop.service;
 
 import org.springframework.stereotype.Service;
 import takred.weaponshop.Couple;
+import takred.weaponshop.WeaponName;
 import takred.weaponshop.builder.WeaponBuilder;
 import takred.weaponshop.builder.WeaponDtoBuilder;
 import takred.weaponshop.dto.WeaponDto;
@@ -34,9 +35,17 @@ public class WeaponService {
         saveIfNotExists(new Weapon("Меч4", 4, 4, 4));
     }
 
-    public WeaponDto getWeapon(UUID id) {
+    public WeaponDto getWeaponById(UUID id) {
         if (weaponRepository.existsById(id)) {
             Weapon weapon = weaponRepository.findById(id).get();
+            return new WeaponMapper().map(weapon);
+        }
+        return null;
+    }
+
+    public WeaponDto getWeaponByName(WeaponName name) {
+        if (weaponRepository.existsByName(name.getName())) {
+            Weapon weapon = weaponRepository.findByName(name.getName());
             return new WeaponMapper().map(weapon);
         }
         return null;

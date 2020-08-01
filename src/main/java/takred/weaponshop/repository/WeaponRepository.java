@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface WeaponRepository extends JpaRepository<Weapon, UUID> {
     boolean existsByName(String name);
+
+    Weapon findByName(String name);
 }
