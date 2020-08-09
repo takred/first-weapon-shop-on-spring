@@ -3,8 +3,6 @@ package takred.weaponshop.service;
 import org.springframework.stereotype.Service;
 import takred.weaponshop.Couple;
 import takred.weaponshop.WeaponName;
-import takred.weaponshop.builder.WeaponBuilder;
-import takred.weaponshop.builder.WeaponDtoBuilder;
 import takred.weaponshop.dto.WeaponDto;
 import takred.weaponshop.entity.Weapon;
 import takred.weaponshop.mapper.WeaponMapper;
@@ -18,9 +16,11 @@ import java.util.UUID;
 @Service
 public class WeaponService {
     private final WeaponRepository weaponRepository;
+    private final WeaponMapper weaponMapper;
 
-    public WeaponService(WeaponRepository weaponRepository) {
+    public WeaponService(WeaponRepository weaponRepository, WeaponMapper weaponMapper) {
         this.weaponRepository = weaponRepository;
+        this.weaponMapper = weaponMapper;
     }
 
     @PostConstruct
@@ -38,7 +38,7 @@ public class WeaponService {
     public WeaponDto getWeaponById(UUID id) {
         if (weaponRepository.existsById(id)) {
             Weapon weapon = weaponRepository.findById(id).get();
-            return new WeaponMapper().map(weapon);
+            return weaponMapper.map(weapon);
         }
         return null;
     }
@@ -46,7 +46,7 @@ public class WeaponService {
     public WeaponDto getWeaponByName(WeaponName name) {
         if (weaponRepository.existsByName(name.getName())) {
             Weapon weapon = weaponRepository.findByName(name.getName());
-            return new WeaponMapper().map(weapon);
+            return weaponMapper.map(weapon);
         }
         return null;
     }
